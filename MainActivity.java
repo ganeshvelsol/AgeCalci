@@ -115,9 +115,11 @@ public class MainActivity extends AppCompatActivity
             int userDays = Integer.parseInt(userDay.getText().toString().trim());
             int userMonths = Integer.parseInt(userMonth.getText().toString().trim());
             int userYears = Integer.parseInt(userYear.getText().toString().trim());
-            if (cday > userDays) {
+            if (cday > userDays)
+            {
                 int fd1 = cday - userDays;
-                if (cmonths > userMonths) {
+                if (cmonths > userMonths)
+                {
                     //do direct operation
                     int fm1 = cmonths - userMonths;
                     int fyears = cyears - userYears;
@@ -132,7 +134,8 @@ public class MainActivity extends AppCompatActivity
                     minutes.setText(""+min);
                     weeks.setText(""+(fyears*365+fm1*30+fd1)/7);
 
-                } else {
+                } else
+                    {
                     //int f_month=
                     int ffmon = cmonths + 12;
                     int ffmonths = ffmon - userMonths;
@@ -151,11 +154,12 @@ public class MainActivity extends AppCompatActivity
             } else if (cday < userDays) {
                 int f_day = cday + 30;
                 fc_month = cmonths - 1;
-                if (fc_month < userMonths) {
+                if (fc_month < userMonths)
+                {
                     fc_month = fc_month + 12;
                     int mon = fc_month - userMonths;
                     int dd = f_day - userDays;
-                    int year = cyears - userYears;
+                    int year = cyears - userYears-1;
                     int leapYe = year % 4;
                     //text_view.setText(""+year+"years completed"+mon+" months"+dd+" days ");
                     yeras.setText("" + year);
@@ -167,11 +171,13 @@ public class MainActivity extends AppCompatActivity
                     minutes.setText(""+(hr*60));
                     weeks.setText(""+(year*365+mon*30+dd)/7);
 
-                } else {
+                }
+                else
+                    {
 
                     int ffmonths = fc_month - userMonths;
                     int dd = f_day - userDays;
-                    int year = cyears - userYears;
+                    int year = cyears - userYears-1;
                     int leaps = year % 4;
                     //text_view.setText(""+year+"years completed "+ffmonths+" months"+dd+" days ");
                     yeras.setText("" + year);
