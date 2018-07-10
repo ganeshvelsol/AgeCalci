@@ -92,6 +92,14 @@ public class AgeCalculator extends Fragment
             userYear.setError("enter value");
 
         }
+        else if (Integer.parseInt(userDay.getText().toString().trim())>31)
+        {
+            userDay.setError("enter accurate day");
+        }
+        else if (Integer.parseInt(userMonth.getText().toString().trim())>12)
+        {
+            userMonth.setError("enter accurate month");
+        }
         else if (!cday1.getText().toString().trim().isEmpty())
         {
             yeras.setVisibility(View.VISIBLE);
