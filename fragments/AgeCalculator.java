@@ -146,7 +146,7 @@ public class AgeCalculator extends Fragment
                     int year = cyears - userYears;
                     int leapYe = year % 4;
                     //text_view.setText(""+year+"years completed"+mon+" months"+dd+" days ");
-                    yeras.setText("" + year);
+                    yeras.setText("" + (year-1));
                     months.setText("" + mon);
                     days.setText("" + dd);
 
