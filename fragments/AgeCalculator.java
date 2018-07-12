@@ -23,6 +23,8 @@ public class AgeCalculator extends Fragment
     Button getDetails,clearBtn;
     TextView text_view,yeras,months,days,hours,minutes,weeks;
     int fc_month;
+    int yrs_2,oddday1,dayss,yrs;
+    String roju[]={"sunday","Monday","tuesday","wednesday","thursday","friday","saturday"};
     View v;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -111,9 +113,11 @@ public class AgeCalculator extends Fragment
             int userDays = Integer.parseInt(userDay.getText().toString().trim());
             int userMonths = Integer.parseInt(userMonth.getText().toString().trim());
             int userYears = Integer.parseInt(userYear.getText().toString().trim());
-            if (cday > userDays) {
+            if (cday > userDays)
+            {
                 int fd1 = cday - userDays;
-                if (cmonths > userMonths) {
+                if (cmonths > userMonths)
+                {
                     //do direct operation
                     int fm1 = cmonths - userMonths;
                     int fyears = cyears - userYears;
@@ -127,7 +131,7 @@ public class AgeCalculator extends Fragment
                     hours.setText(""+hrs);
                     minutes.setText(""+min);
                     weeks.setText(""+(fyears*365+fm1*30+fd1)/7);
-
+                    forDayPurpose();
                 } else {
                     //int f_month=
                     int ffmon = cmonths + 12;
@@ -238,5 +242,118 @@ public class AgeCalculator extends Fragment
         hours.setText("");
         minutes.setText("");
         weeks.setText("");
+    }
+    public void forDayPurpose()
+    {
+        yrs=Integer.parseInt(cyear.getText().toString().trim())-1;
+        if (yrs<1600)
+        {
+
+        }
+        else
+        {
+            int yrs_1=yrs-1600;
+            switch ((yrs_1/100))
+            {
+                case 1:
+                {
+                    yrs_2=100-yrs_1;
+                    oddday1=5;
+                    processData();
+                    break;
+                }
+                case 2:
+                {
+                    yrs_2=200-yrs_1;
+                    oddday1=3;
+                    processData();
+                    break;
+                }
+                case 3:
+                {
+                    yrs_2=300-yrs_1;
+                    oddday1=1;
+                    processData();
+                    break;
+                }
+                case 4:
+                {
+                    yrs_2=400-yrs_1;
+                    oddday1=0;
+                    processData();
+                    break;
+                }
+                default:
+                    break;
+            }
+        }
+    }
+    public void processData()
+    {
+        int quotient = yrs_2 / 4;
+        int one=(quotient*2)+((yrs_2-quotient)*1);
+        int ss=one/7;
+        int odd2=one%7;
+        int final_oddday2=-1*odd2;
+
+        int uday=Integer.parseInt(userDay.getText().toString().trim());
+        int umonth=Integer.parseInt(userMonth.getText().toString().trim());
+        switch (umonth)
+        {
+            case 1:
+            {
+                dayss=uday;
+                break;
+            }case 2:
+        {
+            dayss=31+uday;
+            break;
+        }case 3:
+        {
+            dayss=31+28+uday;
+            break;
+        }case 4:
+        {
+            dayss=31+28+31+uday;
+            break;
+        }case 5:
+        {
+            dayss=31+28+31+30+uday;
+            break;
+        }case 6:
+        {
+            dayss=31+28+31+30+31+uday;
+            break;
+        }case 7:
+        {
+            dayss=31+28+31+30+31+30+uday;
+            break;
+        }case 8:
+        {
+            dayss=31+28+31+30+31+30+31+uday;
+            break;
+        }case 9:
+        {
+            dayss=31+28+31+30+31+30+31+31+uday;
+            break;
+        }case 10:
+        {
+            dayss=31+28+31+30+31+30+31+31+30+uday;
+            break;
+        }case 11:
+        {
+            dayss=31+28+31+30+31+30+31+31+30+31+uday;
+            break;
+        }case 12:
+        {
+            dayss=31+28+31+30+31+30+31+31+30+31+30+uday;
+            break;
+        }
+
+        }
+        //here convert days into weeks and odd days
+        int oddday3=dayss%7;
+        int finalodd=oddday1+final_oddday2+oddday3;
+        Toast.makeText(getContext(), ""+roju[finalodd]+"odd number is"+finalodd, Toast.LENGTH_SHORT).show();
     }
 }
