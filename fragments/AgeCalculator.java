@@ -21,9 +21,9 @@ public class AgeCalculator extends Fragment
 {
     EditText cday1,cmonth,cyear,userDay,userMonth,userYear;
     Button getDetails,clearBtn;
-    TextView text_view,yeras,months,days,hours,minutes,weeks;
+    TextView text_view,yeras,months,days,hours,minutes,weeks,next_year1,next_year2,next_year3;
     int fc_month;
-    int yrs_2,oddday1,dayss,yrs;
+    int yrs_2,oddday1,dayss,yrs,count=0;
     String roju[]={"sunday","Monday","tuesday","wednesday","thursday","friday","saturday"};
     View v;
     @Override
@@ -49,6 +49,9 @@ public class AgeCalculator extends Fragment
         getDetails=(Button) v.findViewById(R.id.submit_btn);
         clearBtn=(Button)v.findViewById(R.id.clear_btn);
         text_view=(TextView)v.findViewById(R.id.text_view);
+        next_year3=(TextView)v.findViewById(R.id.next_year3);
+        next_year2=(TextView)v.findViewById(R.id.next_year2);
+        next_year1=(TextView)v.findViewById(R.id.next_year1);
         //displaying months
         yeras=(TextView)v.findViewById(R.id.years);
         months=(TextView)v.findViewById(R.id.months);
@@ -79,7 +82,7 @@ public class AgeCalculator extends Fragment
     }
     public void dataProcess()
     {
-
+        forDayPurpose(Integer.parseInt(cyear.getText().toString().trim())-1);
         if (userDay.getText().toString().isEmpty())
         {
             Toast.makeText(getContext(), "please provide details", Toast.LENGTH_SHORT).show();
@@ -118,6 +121,7 @@ public class AgeCalculator extends Fragment
                 int fd1 = cday - userDays;
                 if (cmonths > userMonths)
                 {
+
                     //do direct operation
                     int fm1 = cmonths - userMonths;
                     int fyears = cyears - userYears;
@@ -131,8 +135,10 @@ public class AgeCalculator extends Fragment
                     hours.setText(""+hrs);
                     minutes.setText(""+min);
                     weeks.setText(""+(fyears*365+fm1*30+fd1)/7);
-                    forDayPurpose();
-                } else {
+
+                } else
+                    {
+
                     //int f_month=
                     int ffmon = cmonths + 12;
                     int ffmonths = ffmon - userMonths;
@@ -147,6 +153,7 @@ public class AgeCalculator extends Fragment
                     hours.setText(""+hrs);
                     minutes.setText(""+(hrs)*60);
                     weeks.setText(""+(fyearss*365+ffmonths*30+fd1)/7);
+
                 }
             } else if (cday < userDays) {
                 int f_day = cday + 30;
@@ -243,9 +250,10 @@ public class AgeCalculator extends Fragment
         minutes.setText("");
         weeks.setText("");
     }
-    public void forDayPurpose()
+    public void forDayPurpose(int ss)
     {
-        yrs=Integer.parseInt(cyear.getText().toString().trim())-1;
+        count++;
+        yrs=ss;
         if (yrs<1600)
         {
 
@@ -354,6 +362,17 @@ public class AgeCalculator extends Fragment
         //here convert days into weeks and odd days
         int oddday3=dayss%7;
         int finalodd=oddday1+final_oddday2+oddday3;
-        Toast.makeText(getContext(), ""+roju[finalodd]+"odd number is"+finalodd, Toast.LENGTH_SHORT).show();
+        if (finalodd<8)
+        {
+            next_year1.setText("in"+(yrs+1)+" year day is "+roju[finalodd]);
+            next_year2.setText("in"+(yrs+2)+" year day is "+roju[finalodd+1]);
+            //Toast.makeText(getContext(), ""+roju[finalodd]+"odd number is"+finalodd, Toast.LENGTH_SHORT).show();
+        }
+        else
+        {
+            int dd=finalodd%7;
+            next_year1.setText("in"+(yrs+1)+" year day is "+roju[dd]);
+            next_year2.setText("in"+(yrs+2)+" year day is "+roju[dd+1]);
+        }
     }
 }
